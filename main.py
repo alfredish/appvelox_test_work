@@ -18,7 +18,7 @@ class LoginForm(FlaskForm):
 UPLOAD_FOLDER = '../try_find_work/static/images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
-app = Flask(__name__) #создаем экземпляр объекта Flask
+app = Flask(__name__) 
 app.config['SECRET_KEY'] = 'lEay3xpXwDHOMQG0tYTKAiYQlbQ2pl0BS78RtiFQOdwrW7jgU7TleH8qLLr7'
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
@@ -57,7 +57,7 @@ def main():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             href = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            print(href)
+            
 
         #проверка на размеры:
         try:
@@ -70,21 +70,6 @@ def main():
         con.commit()
         con.close()
     return render_template('main.html', form=form)
-
-
-
-
-
-
-
-#Не используется
-#функция открывает последнее добавленное изображение
-@app.route('/uploads/<filename>')
-def uploaded_file(filename):
-    return send_from_directory(app.config['UPLOAD_FOLDER'],filename)
-
-
-
 
 
 
@@ -123,4 +108,4 @@ def check_status(n):
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run()

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<!-- flash messages -->
+{% with messages = get_flashed_messages() %}
+{% if messages %}
+<ul>
+    {% for message in messages %}
+    <li>{{ message }}</li>
+    {% endfor %}
+</ul>
+{% endif %}
+{% endwith %}
+
+<h3>Путь для постановки задачи на изменение размера</h3>
+
+    <form action="" method="post" enctype="multipart/form-data">
+        {{ form.hidden_tag() }}
+        <p>{{ form.data.label }}</p>
+        <p>{{ form.data() }}
+            {% for error in form.data.errors %}
+                <br>
+                <span style="color: red;">[{{ error }}]</span>
+            {% endfor %}
+        </p>
+
+        <p><input type=file name=file></p>
+
+        <p>{{ form.submit()  }}</p>
+    </form>
+
+</body>
+</html>

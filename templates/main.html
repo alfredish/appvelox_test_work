@@ -17,9 +17,7 @@
 {% endif %}
 {% endwith %}
 
-<h3>Путь для постановки задачи на изменение размера</h3>
-
-    <form action="" method="post" enctype="multipart/form-data">
+ <form action="" method="post" enctype="multipart/form-data">
         {{ form.hidden_tag() }}
         <p>{{ form.data.label }}</p>
         <p>{{ form.data() }}
@@ -29,10 +27,11 @@
             {% endfor %}
         </p>
 
+        <p>Поддерживаемые форматы изображения png, jpg</p>
         <p><input type=file name=file></p>
 
         <p>{{ form.submit()  }}</p>
-    </form>
+ </form>
 
 </body>
 </html>

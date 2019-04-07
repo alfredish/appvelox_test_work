@@ -59,13 +59,16 @@ def main():
             href = os.path.join(app.config['UPLOAD_FOLDER'], filename)
             print(href)
 
+        #проверка на размеры:
+        try:
+            if 0 < var_name[0] < 999 and 0 < var_name[1] < 999:
+                cur.execute("INSERT INTO image(id,href,height,width) VALUES (?, ?, ?, ?)", (max_id, href, var_name[0],var_name[1]))
+                flash('ID для изображение {}'.format(max_id))
+        except:
+            flash("Введите корректные данные")
 
-        cur.execute("INSERT INTO image(id,href,height,width) VALUES (?, ?, ?, ?)", (max_id, href, var_name[0],var_name[1]))
         con.commit()
         con.close()
-        #flask text with id
-        flash('ID для изображение {}'.format(max_id))
-
     return render_template('main.html', form=form)
 
 

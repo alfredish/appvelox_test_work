@@ -15,7 +15,7 @@ class LoginForm(FlaskForm):
     file = FileField()
 
 
-UPLOAD_FOLDER = '../try_find_work/static/images/'
+UPLOAD_FOLDER = '../appvelox_test_work-master/static/images/'
 ALLOWED_EXTENSIONS = set(['png', 'jpg'])
 
 app = Flask(__name__) 
@@ -57,11 +57,11 @@ def main():
             filename = secure_filename(file.filename)
             file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
             href = os.path.join(app.config['UPLOAD_FOLDER'], filename)
-            
+            #print(href)
 
         #проверка на размеры:
         try:
-            if 0 < var_name[0] < 999 and 0 < var_name[1] < 999:
+            if 0 < int(var_name[0]) < 999 and 0 < int(var_name[1]) < 999:
                 cur.execute("INSERT INTO image(id,href,height,width) VALUES (?, ?, ?, ?)", (max_id, href, var_name[0],var_name[1]))
                 flash('ID для изображение {}'.format(max_id))
         except:
@@ -99,7 +99,7 @@ def check_status(n):
                 cur.execute("select href from image where id = ?", n)
                 href = cur.fetchall()
                 href = href[0][0]
-                href = href[17:]
+                href = href[29:]
 
                 return render_template('check_status.html', n=n, width=width, height=height, href=href)
         return "error"
@@ -108,4 +108,4 @@ def check_status(n):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
